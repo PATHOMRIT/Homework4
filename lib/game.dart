@@ -1,30 +1,54 @@
+
 import 'dart:math';
 
+// ignore_for_file: avoid_print
+
 class Game {
-  static const maxRandom = 100;
+  static dynamic _maxRandom;
+  static final List<int> _round = [];
   int? _answer;
-  var countNum = 0;
-  Game() {
+  int _count = 0;
+
+  Game({int maxRandom = 100}) {
     var r = Random();
+    _setMaxRandom = maxRandom;
     _answer = r.nextInt(maxRandom) + 1;
   }
+
   int doGuess(int num) {
-    doCount();
-    if (num > _answer!) {
-      return 1;
-    } else if (num < _answer!) {
-      return -1;
-    } else {
+    _doCount();
+    if (_answer! == num) {
       return 0;
+    } else if (_answer! < num) {
+      return 1;
+    } else {
+      return -1;
     }
   }
-  getmaxRandom() {
-    return maxRandom;
+
+  int get getMaxRandom {
+    return _maxRandom;
   }
-  doCount() {
-    countNum++;
+
+  _doCount() {
+    _count++;
   }
-  int getdoCount() {
-    return countNum;
+
+  set _setMaxRandom(int info) {
+    _maxRandom = info;
   }
+
+  List<int> get getRound {
+    return _round;
+  }
+
+  int get getCount {
+    _doRound(_count);
+    return _count;
+  }
+  _doRound(int info) {
+    _round.add(info);
+  }
+
+
 }
